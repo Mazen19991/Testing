@@ -1,59 +1,43 @@
-import { Table } from "antd";
-import React, { useEffect, useState } from "react";
-import ApiService from "../utils/ApiCalls";
+import { Table } from 'antd';
+import ApiService from '../utils/ApiCalls';
+import React, { useEffect, useState } from 'react';
 
 const TableComp = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     (async () => {
-      if (data.length === 0 && loading === true) {
-        const apiCall = await ApiService.getPosts();
-        setData(apiCall.data);
-        setLoading(false);
-      }
+      const apiCall = await ApiService.getPosts();
+      setData(apiCall.data);
     })();
-    return setLoading(false);
   }, []);
-  console.log("data", data);
 
   const columns = [
     {
-      title: "User Id",
-      dataIndex: "userId",
-      key: "userId",
-      render: (text) => <a>{text}</a>,
+      title: 'User Id',
+      dataIndex: 'userId',
     },
     {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
+      title: 'Id',
+      dataIndex: 'id',
     },
     {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
+      title: 'Title',
+      dataIndex: 'title',
     },
     {
-      title: "Body",
-      key: "body",
-      dataIndex: "body",
+      title: 'Body',
+      dataIndex: 'body',
     },
   ];
+
   return (
     <>
-      {/* {data && data.length === 0 ? (
-        <Table columns={columns} dataSource={data} />
+      {data && data.length > 0 ? (
+        <Table columns={columns} dataSource={data} rowKey={'id'} />
       ) : (
         <>No Data</>
-      )} */}
-      {data &&
-        data.lenght > 0 &&
-        data.map((element) => {
-          return <h1> whatever</h1>;
-        })}
+      )}
     </>
   );
 };
