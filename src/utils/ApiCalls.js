@@ -10,13 +10,6 @@ const ApiService = {
       url: "/posts",
     });
   },
-  sendPosts: () => {
-   return AxiosInstance({
-      baseURL,
-      method: "post",
-      url: "/jhavbdjahsm",
-    });
-  },
 };
 
 export default ApiService;
